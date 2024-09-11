@@ -1,8 +1,8 @@
 import streamlit as st
-import openai
+from openai import OpenAI
 
-# Set up OpenAI API key
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+# Set up OpenAI client
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 st.title("🚔 Early Prisoner Release Decision Support")
 
@@ -13,8 +13,8 @@ if st.button("Analyze Case"):
     if case_files:
         # Generate arguments for and against release
         arguments_prompt = f"Based on the following case files, provide objective arguments for and against early release:\n\n{case_files}\n\nArguments for release:\n1."
-        arguments_response = openai.ChatCompletion.create(
-            model="gpt-4o",
+        arguments_response = client.chat.completions.create(
+            model="gpt-4",
             messages=[{"role": "user", "content": arguments_prompt}],
             max_tokens=500,
         )
@@ -31,7 +31,7 @@ if st.button("Analyze Case"):
         
         # Generate recommendation
         recommendation_prompt = f"Based on the following case files and arguments, provide a concise recommendation on whether the prisoner should be released early or not:\n\nCase files:\n{case_files}\n\nArguments:\n{arguments_response.choices[0].message.content}\n\nRecommendation:"
-        recommendation_response = openai.ChatCompletion.create(
+        recommendation_response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": recommendation_prompt}],
             max_tokens=150,
