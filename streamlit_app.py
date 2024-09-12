@@ -23,7 +23,7 @@ def generate_fake_similar_cases(case_files):
         max_tokens=500,
     )
     
-    return response.choices[0].message.content.strip().split("\n\n")
+    return response.choices[0].message.content.strip()
 
 if st.button("Analyze Case"):
     if case_files:
