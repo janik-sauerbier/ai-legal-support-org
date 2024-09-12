@@ -4,7 +4,7 @@ from openai import OpenAI
 # Set up OpenAI client
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
-st.title("🚔 Early Prisoner Release Decision Support")
+st.title("⚖️ Prisoner Release Decision Support")
 
 # Input for case files
 case_files = st.text_area("Enter case files information:", height=200)
