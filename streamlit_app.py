@@ -4,7 +4,8 @@ from openai import OpenAI
 # OpenAI-Client einrichten
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
-st.title("⚖️ Entscheidungsunterstützung für Gefangenenentlassung")
+st.title("⚖️ FAIR")
+st.subheader("Fast AI Review for Inmate Release")
 
 # Eingabe für Fallakten
 case_files = st.text_area("Geben Sie Informationen zu den Fallakten ein:", height=200)
