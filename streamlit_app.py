@@ -150,9 +150,9 @@ Analyse:
         with st.expander("Ähnliche Fälle anzeigen"):
             st.markdown(similar_cases)
         
-        st.write("Hinweis: Dies sind fiktive Fälle, die nur zu Vergleichszwecken generiert wurden.")
+        st.write("*__Hinweis:__ Dies sind fiktive Fälle, die nur zu Vergleichszwecken generiert wurden.*")
         
     else:
-        st.warning("Bitte geben Sie Informationen zu den Fallakten ein.")
+        st.warning("Bitte geben Sie Informationen zu den Fallakten ein!")
 
-st.write("Hinweis: Dieses Tool dient nur zur Entscheidungsunterstützung. Endgültige Entscheidungen sollten von qualifizierten Fachleuten unter Berücksichtigung aller relevanten Faktoren getroffen werden.")
+st.write("*__Hinweis:__ Dieses Tool dient nur zur Entscheidungsunterstützung. Endgültige Entscheidungen sollten von qualifizierten Fachleuten unter Berücksichtigung aller relevanten Faktoren getroffen werden.*")
