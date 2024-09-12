@@ -1,5 +1,6 @@
 import streamlit as st
 from openai import OpenAI
+import random
 
 # Set up OpenAI client
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
@@ -53,6 +54,16 @@ Analysis:
         # Display recommendation
         st.subheader("Recommendation")
         st.write(recommendation_response.choices[0].message.content)
+        
+        # Generate and display similar cases
+        st.subheader("Similar Cases")
+        similar_cases = generate_fake_similar_cases(case_files)
+        with st.expander("View Similar Cases"):
+            for i, case in enumerate(similar_cases, 1):
+                st.markdown(f"**Case {i}:** {case}")
+        
+        st.write("Note: These are fictional cases generated for comparison purposes only.")
+        
     else:
         st.warning("Please enter case files information.")
 
