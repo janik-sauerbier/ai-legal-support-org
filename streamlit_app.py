@@ -31,13 +31,39 @@ if st.button("Fall analysieren"):
         # Argumente für und gegen die Entlassung generieren
         arguments_prompt = f"""Basierend auf den folgenden Fallakten, liefern Sie objektive Argumente für und gegen eine vorzeitige Entlassung unter Berücksichtigung dieser Kriterien:
 
-1. Kriminelle Vorgeschichte und Art des Verbrechens
-2. Verhalten während der Haft
-3. Risiko für die öffentliche Sicherheit
-4. Verbüßte Zeit und Richtlinien zur Strafzumessung
-5. Plan für die Zeit nach der Entlassung
+Die Bewertung der Fälle soll auf folgenden Kriterien basieren:
 
-Geben Sie für jedes Kriterium spezifische Details aus den Fallakten an. Wenn Informationen zu einem Kriterium fehlen, geben Sie an, dass mehr Informationen benötigt werden.
+### Argumente für die vorzeitige Aussetzung der Reststrafe zur Bewährung
+
+1. Erfüllung der Voraussetzungen nach § 57 Abs. 2 StGB:
+   - Erstmals Freiheitsstrafe und Strafmaß nicht über zwei Jahre
+   - Besondere Umstände, die eine Aussetzung rechtfertigen
+
+2. Positive Entwicklung während des Strafvollzugs (§ 57 Abs. 1 StGB):
+   - Vorbildliches Verhalten und aktive Rehabilitation
+
+3. Günstige Prognose für das Sicherheitsinteresse der Allgemeinheit (§ 57 Abs. 1 Nr. 2 StGB):
+   - Keine Gefahr für die Allgemeinheit
+   - Positive Prognose für zukünftiges Verhalten
+
+### Argumente gegen die vorzeitige Aussetzung der Reststrafe zur Bewährung
+
+1. Fehlende besondere Umstände gemäß § 57 Abs. 2 StGB:
+   - Keine außergewöhnlichen, die Tat mildernden Umstände
+
+2. Unzureichende Rehabilitation und Verhalten im Vollzug (§ 57 Abs. 1 StGB):
+   - Keine signifikanten Fortschritte in der Rehabilitation
+   - Nur regelgerechtes Verhalten reicht nicht aus
+
+3. Negative Wahrnehmung in der Allgemeinheit (§ 57 Abs. 1 StGB):
+   - Mögliche Beeinträchtigung des Vertrauens in die Strafjustiz
+
+4. Nicht erfüllte Voraussetzungen des § 57 Abs. 1 StGB:
+   - Zwei Drittel der Strafe nicht verbüßt
+   - Fehlende Zustimmung der verurteilten Person
+   - Hohe Rückfallgefahr
+
+Bitte berücksichtigen Sie diese Kriterien bei der Bewertung des Falles und nennen Sie in Ihrer Begründung die relevanten Gesetzesartikel.
 
 Fallakten:
 {case_files}
@@ -50,14 +76,8 @@ Analyse:
             max_tokens=1000,
         )
         
-        # Argumente anzeigen
-        col1, col2 = st.columns(2)
-        with col1:
-            st.subheader("Argumente für die Entlassung")
-            st.write(arguments_response.choices[0].message.content.split("\n\nArgumente gegen die Entlassung:\n")[0])
-        with col2:
-            st.subheader("Argumente gegen die Entlassung")
-            st.write(arguments_response.choices[0].message.content.split("\n\nArgumente gegen die Entlassung:\n")[1] if len(arguments_response.choices[0].message.content.split("\n\nArgumente gegen die Entlassung:\n")) > 1 else "Keine Argumente gegen die Entlassung gefunden.")
+        st.subheader("Analyse")
+        st.write(arguments_response.choices[0].message.content)
         
         # Empfehlung generieren
         recommendation_prompt = f"Basierend auf den folgenden Fallakten und Argumenten, geben Sie eine prägnante Empfehlung, ob der Gefangene vorzeitig entlassen werden sollte oder nicht:\n\nFallakten:\n{case_files}\n\nArgumente:\n{arguments_response.choices[0].message.content}\n\nEmpfehlung:"
