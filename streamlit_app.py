@@ -1,21 +1,21 @@
 import streamlit as st
 from openai import OpenAI
 
-# Set up OpenAI client
+# OpenAI-Client einrichten
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
-st.title("⚖️ Prisoner Release Decision Support")
+st.title("⚖️ Entscheidungsunterstützung für Gefangenenentlassung")
 
-# Input for case files
-case_files = st.text_area("Enter case files information:", height=200)
+# Eingabe für Fallakten
+case_files = st.text_area("Geben Sie Informationen zu den Fallakten ein:", height=200)
 
-def generate_fake_similar_cases(case_files):
-    prompt = f"""Based on the following case files, generate 4-7 short, fictional German case descriptions with similar contexts. Each case should be 2-3 sentences long and include the decision (released or not released).
+def generiere_fiktive_aehnliche_faelle(case_files):
+    prompt = f"""Basierend auf den folgenden Fallakten, generieren Sie 4-7 kurze, fiktive deutsche Fallbeschreibungen mit ähnlichen Kontexten. Jeder Fall sollte 2-3 Sätze lang sein und die Entscheidung (entlassen oder nicht entlassen) beinhalten.
 
-    Case files:
+    Fallakten:
     {case_files}
 
-    Generate fictional similar German cases:"""
+    Generieren Sie fiktive ähnliche deutsche Fälle:"""
 
     response = client.chat.completions.create(
         model="gpt-4o",
@@ -25,23 +25,23 @@ def generate_fake_similar_cases(case_files):
     
     return response.choices[0].message.content.strip()
 
-if st.button("Analyze Case"):
+if st.button("Fall analysieren"):
     if case_files:
-        # Generate arguments for and against release
-        arguments_prompt = f"""Based on the following case files, provide objective arguments for and against early release, considering these criteria:
+        # Argumente für und gegen die Entlassung generieren
+        arguments_prompt = f"""Basierend auf den folgenden Fallakten, liefern Sie objektive Argumente für und gegen eine vorzeitige Entlassung unter Berücksichtigung dieser Kriterien:
 
-1. Criminal History and Nature of the Crime
-2. Behavior During Incarceration
-3. Risk to Public Safety
-4. Time Served and Sentencing Guidelines
-5. Post-Release Plan
+1. Kriminelle Vorgeschichte und Art des Verbrechens
+2. Verhalten während der Haft
+3. Risiko für die öffentliche Sicherheit
+4. Verbüßte Zeit und Richtlinien zur Strafzumessung
+5. Plan für die Zeit nach der Entlassung
 
-For each criterion, provide specific details from the case files. If information is lacking for any criterion, state that more information is needed.
+Geben Sie für jedes Kriterium spezifische Details aus den Fallakten an. Wenn Informationen zu einem Kriterium fehlen, geben Sie an, dass mehr Informationen benötigt werden.
 
-Case files:
+Fallakten:
 {case_files}
 
-Analysis:
+Analyse:
 """
         arguments_response = client.chat.completions.create(
             model="gpt-4o",
@@ -49,36 +49,36 @@ Analysis:
             max_tokens=1000,
         )
         
-        # Display arguments
+        # Argumente anzeigen
         col1, col2 = st.columns(2)
         with col1:
-            st.subheader("Arguments for Release")
-            st.write(arguments_response.choices[0].message.content.split("\n\nArguments against release:\n")[0])
+            st.subheader("Argumente für die Entlassung")
+            st.write(arguments_response.choices[0].message.content.split("\n\nArgumente gegen die Entlassung:\n")[0])
         with col2:
-            st.subheader("Arguments against Release")
-            st.write(arguments_response.choices[0].message.content.split("\n\nArguments against release:\n")[1] if len(arguments_response.choices[0].message.content.split("\n\nArguments against release:\n")) > 1 else "No arguments against release found.")
+            st.subheader("Argumente gegen die Entlassung")
+            st.write(arguments_response.choices[0].message.content.split("\n\nArgumente gegen die Entlassung:\n")[1] if len(arguments_response.choices[0].message.content.split("\n\nArgumente gegen die Entlassung:\n")) > 1 else "Keine Argumente gegen die Entlassung gefunden.")
         
-        # Generate recommendation
-        recommendation_prompt = f"Based on the following case files and arguments, provide a concise recommendation on whether the prisoner should be released early or not:\n\nCase files:\n{case_files}\n\nArguments:\n{arguments_response.choices[0].message.content}\n\nRecommendation:"
+        # Empfehlung generieren
+        recommendation_prompt = f"Basierend auf den folgenden Fallakten und Argumenten, geben Sie eine prägnante Empfehlung, ob der Gefangene vorzeitig entlassen werden sollte oder nicht:\n\nFallakten:\n{case_files}\n\nArgumente:\n{arguments_response.choices[0].message.content}\n\nEmpfehlung:"
         recommendation_response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o",
             messages=[{"role": "user", "content": recommendation_prompt}],
             max_tokens=150,
         )
         
-        # Display recommendation
-        st.subheader("Recommendation")
+        # Empfehlung anzeigen
+        st.subheader("Empfehlung")
         st.write(recommendation_response.choices[0].message.content)
         
-        # Generate and display similar cases
-        st.subheader("Similar Cases")
-        similar_cases = generate_fake_similar_cases(case_files)
-        with st.expander("View Similar Cases"):
+        # Ähnliche Fälle generieren und anzeigen
+        st.subheader("Ähnliche Fälle")
+        similar_cases = generiere_fiktive_aehnliche_faelle(case_files)
+        with st.expander("Ähnliche Fälle anzeigen"):
             st.markdown(similar_cases)
         
-        st.write("Note: These are fictional cases generated for comparison purposes only.")
+        st.write("Hinweis: Dies sind fiktive Fälle, die nur zu Vergleichszwecken generiert wurden.")
         
     else:
-        st.warning("Please enter case files information.")
+        st.warning("Bitte geben Sie Informationen zu den Fallakten ein.")
 
-st.write("Note: This tool is for decision support only. Final decisions should be made by qualified professionals considering all relevant factors.")
+st.write("Hinweis: Dieses Tool dient nur zur Entscheidungsunterstützung. Endgültige Entscheidungen sollten von qualifizierten Fachleuten unter Berücksichtigung aller relevanten Faktoren getroffen werden.")
