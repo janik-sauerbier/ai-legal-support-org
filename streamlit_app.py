@@ -12,22 +12,35 @@ case_files = st.text_area("Enter case files information:", height=200)
 if st.button("Analyze Case"):
     if case_files:
         # Generate arguments for and against release
-        arguments_prompt = f"Based on the following case files, provide objective arguments for and against early release:\n\n{case_files}\n\nArguments for release:\n1."
+        arguments_prompt = f"""Based on the following case files, provide objective arguments for and against early release, considering these criteria:
+
+1. Criminal History and Nature of the Crime
+2. Behavior During Incarceration
+3. Risk to Public Safety
+4. Time Served and Sentencing Guidelines
+5. Post-Release Plan
+
+For each criterion, provide specific details from the case files. If information is lacking for any criterion, state that more information is needed.
+
+Case files:
+{case_files}
+
+Analysis:
+"""
         arguments_response = client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o",
             messages=[{"role": "user", "content": arguments_prompt}],
-            max_tokens=500,
+            max_tokens=1000,
         )
-        arguments = arguments_response.choices[0].message.content.split("\n\nArguments against release:\n")
         
         # Display arguments
         col1, col2 = st.columns(2)
         with col1:
             st.subheader("Arguments for Release")
-            st.write(arguments[0])
+            st.write(arguments_response.choices[0].message.content.split("\n\nArguments against release:\n")[0])
         with col2:
             st.subheader("Arguments against Release")
-            st.write(arguments[1] if len(arguments) > 1 else "No arguments against release found.")
+            st.write(arguments_response.choices[0].message.content.split("\n\nArguments against release:\n")[1] if len(arguments_response.choices[0].message.content.split("\n\nArguments against release:\n")) > 1 else "No arguments against release found.")
         
         # Generate recommendation
         recommendation_prompt = f"Based on the following case files and arguments, provide a concise recommendation on whether the prisoner should be released early or not:\n\nCase files:\n{case_files}\n\nArguments:\n{arguments_response.choices[0].message.content}\n\nRecommendation:"
