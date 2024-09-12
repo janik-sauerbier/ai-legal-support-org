@@ -18,10 +18,7 @@ Bewährungshilfe und Rehabilitation:
 Während seiner Haftzeit zeigte A ein bemerkenswertes Verhalten. Er nahm aktiv an sämtlichen Rehabilitationsprogrammen teil, darunter eine Therapie zur Bewältigung von Impulsivität und ein Programm zur beruflichen Weiterbildung. A hat in der JVA eine Ausbildung zum Elektriker abgeschlossen und zeigt ein starkes Interesse an einer Berufslaufbahn nach der Haft.
 
 Familien- und Sozialverhältnisse:
-A ist verheiratet und hat zwei kleine Kinder, die in einer schwierigen Situation sind, da die Familie aufgrund seiner Haft in eine wirtschaftliche Notlage geraten ist. Seine Frau ist stark belastet und benötigt Unterstützung, um die Kinder zu betreuen und den Haushalt zu führen.
-
-Antrag auf vorzeitige Aussetzung:
-A hat am 1. Juli 2023 beim Gericht einen Antrag auf vorzeitige Aussetzung des Strafrestes zur Bewährung gestellt. Die Strafvollstreckungskammer des Landgerichts prüfte den Antrag und kam zu der Entscheidung, dass besondere Umstände im Sinne von § 57 Abs. 2 Nr. 2 StGB vorliegen."""
+A ist verheiratet und hat zwei kleine Kinder, die in einer schwierigen Situation sind, da die Familie aufgrund seiner Haft in eine wirtschaftliche Notlage geraten ist. Seine Frau ist stark belastet und benötigt Unterstützung, um die Kinder zu betreuen und den Haushalt zu führen."""
 
 example_case_2 = """Verurteilung und Haftzeit:
 Der 45-jährige B wurde am 12. Januar 2022 vom Landgericht wegen schwerer Körperverletzung zu einer Freiheitsstrafe von drei Jahren verurteilt. Das Urteil ist seit dem 19. Januar 2022 rechtskräftig. Der B befindet sich derzeit in der Justizvollzugsanstalt (JVA) und hat am 12. Januar 2024 die Hälfte seiner Strafe verbüßt. Zwei Drittel der Strafe werden am 12. Juli 2024 vollstreckt sein.
@@ -33,10 +30,7 @@ Bewährungshilfe und Rehabilitation:
 Während seiner Haftzeit zeigte B nur durchschnittliche Fortschritte. Er nahm an einigen Rehabilitationsprogrammen teil, zeigte jedoch wenig Engagement und wenig Einsicht in seine Taten. Die Berichte der JVA wiesen darauf hin, dass B Schwierigkeiten hatte, sich an die Regeln des Vollzugs zu halten, und es gab mehrere Vorfälle von Disziplinarverstößen.
 
 Familien- und Sozialverhältnisse:
-B ist ledig und hat keine Kinder. Er hat eine stabile familiäre Unterstützung durch seine Eltern, die regelmäßig Kontakt zu ihm haben und bereit sind, ihn nach der Haftzeit zu unterstützen. Seine familiären Verhältnisse sind weitgehend unauffällig und stellen keinen außergewöhnlichen Belastungsfaktor dar.
-
-Antrag auf vorzeitige Aussetzung:
-B hat am 1. Februar 2024 beim Gericht einen Antrag auf vorzeitige Aussetzung des Strafrestes zur Bewährung gestellt. Die Strafvollstreckungskammer des Landgerichts prüfte den Antrag und kam zu der Entscheidung, dass keine besonderen Umstände im Sinne von § 57 Abs. 2 Nr. 2 StGB vorliegen."""
+B ist ledig und hat keine Kinder. Er hat eine stabile familiäre Unterstützung durch seine Eltern, die regelmäßig Kontakt zu ihm haben und bereit sind, ihn nach der Haftzeit zu unterstützen. Seine familiären Verhältnisse sind weitgehend unauffällig und stellen keinen außergewöhnlichen Belastungsfaktor dar."""
 
 example_case_3 = """Verurteilung und Haftzeit:
 Der 32-jährige Herr K. wurde am 15. März 2021 vom Landgericht wegen schwerer Körperverletzung zu einer Freiheitsstrafe von drei Jahren verurteilt. Das Urteil ist seit dem 25. März 2021 rechtskräftig. Herr K. befindet sich derzeit in der Justizvollzugsanstalt (JVA) und hat am 15. März 2023 die Hälfte seiner Strafe verbüßt. Zwei Drittel der Strafe werden am 15. September 2023 vollstreckt sein.
@@ -48,10 +42,7 @@ Bewährungshilfe und Rehabilitation:
 Während seiner Haftzeit zeigte Herr K. nur durchschnittliche Fortschritte. Er nahm zwar an einigen Rehabilitationsmaßnahmen teil, zeigte jedoch wenig Engagement. Sein Verhalten im Vollzug war nicht vorbildlich, da er wiederholt in Auseinandersetzungen mit Mitgefangenen verwickelt war, was zu Disziplinarmaßnahmen führte. Die Berichte der JVA wiesen darauf hin, dass Herr K. zwar die Regeln des Vollzugs größtenteils befolgte, jedoch keine außergewöhnlichen Fortschritte in seiner sozialen Rehabilitation erzielte.
 
 Familien- und Sozialverhältnisse:
-Herr K. ist ledig und hat keine Kinder. Er erhält regelmäßige Besuche von seinen Eltern, die ihn auch nach seiner Haftzeit unterstützen wollen. Seine familiären Verhältnisse sind stabil, stellen jedoch keinen außergewöhnlichen belastenden oder mildernden Faktor dar.
-
-Antrag auf vorzeitige Aussetzung:
-Herr K. stellte am 5. März 2023 einen Antrag auf vorzeitige Aussetzung des Strafrestes zur Bewährung. Die Strafvollstreckungskammer des Landgerichts prüfte den Antrag und entschied, dass keine besonderen Umstände im Sinne von § 57 Abs. 2 Nr. 2 StGB vorliegen. Das Verhalten von Herrn K. im Vollzug und seine mangelnden Fortschritte in der Rehabilitation sprachen gegen eine vorzeitige Entlassung."""
+Herr K. ist ledig und hat keine Kinder. Er erhält regelmäßige Besuche von seinen Eltern, die ihn auch nach seiner Haftzeit unterstützen wollen. Seine familiären Verhältnisse sind stabil, stellen jedoch keinen außergewöhnlichen belastenden oder mildernden Faktor dar."""
 
 # Add dropdown for example cases
 example_options = {
