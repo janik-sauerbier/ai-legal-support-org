@@ -10,12 +10,12 @@ st.title("🚔 Early Prisoner Release Decision Support")
 case_files = st.text_area("Enter case files information:", height=200)
 
 def generate_fake_similar_cases(case_files):
-    prompt = f"""Based on the following case files, generate 4-7 short, fictional case descriptions with similar contexts. Each case should be 2-3 sentences long and include the decision (released or not released).
+    prompt = f"""Based on the following case files, generate 4-7 short, fictional German case descriptions with similar contexts. Each case should be 2-3 sentences long and include the decision (released or not released).
 
     Case files:
     {case_files}
 
-    Generate fictional similar cases:"""
+    Generate fictional similar German cases:"""
 
     response = client.chat.completions.create(
         model="gpt-4o",
@@ -23,7 +23,7 @@ def generate_fake_similar_cases(case_files):
         max_tokens=500,
     )
     
-    return response.choices[0].message.content.split("\n\n")
+    return response.choices[0].message.content.strip().split("\n\n")
 
 if st.button("Analyze Case"):
     if case_files:
@@ -74,8 +74,7 @@ Analysis:
         st.subheader("Similar Cases")
         similar_cases = generate_fake_similar_cases(case_files)
         with st.expander("View Similar Cases"):
-            for i, case in enumerate(similar_cases, 1):
-                st.markdown(f"**Case {i}:** {case}")
+            st.markdown(similar_cases)
         
         st.write("Note: These are fictional cases generated for comparison purposes only.")
         
